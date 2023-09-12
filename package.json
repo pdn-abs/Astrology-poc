@@ -5,9 +5,12 @@
   "dependencies": {
     "@laufire/resist": "^0.0.5",
     "@laufire/utils": "^2.9.2",
+    "dayjs": "^1.11.9",
+    "geo-tz": "^7.0.7",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-scripts": "^5.0.1",
+    "suncalc": "^1.9.0",
     "web-vitals": "^1.1.2"
   },
   "scripts": {
