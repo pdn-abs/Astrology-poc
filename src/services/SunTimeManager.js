@@ -17,6 +17,8 @@ const SunTimeManager = {
 			sunset: dayjs(timeList.sunset, tZone),
 		};
 	},
+	isNotBefore: (dateTime, sunrise) =>
+		dateTime.isSame(sunrise) || dateTime.isAfter(sunrise),
 
 	getDayOfTheWeek: (
 		date, latitude, longitude, tZone
@@ -26,7 +28,7 @@ const SunTimeManager = {
 		const dateTime = dayjs(sunTimeData.date);
 		const { sunrise } = sunTimeData;
 
-		return dateTime.isSame(sunrise) || dateTime.isAfter(sunrise)
+		return SunTimeManager.isNotBefore(dateTime, sunrise)
 			? dateTime.format('dddd')
 			: dateTime.subtract(1, 'day').format('dddd');
 	},
