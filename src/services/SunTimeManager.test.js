@@ -6,7 +6,7 @@ import * as dayjs from 'dayjs';
 jest.mock('dayjs', () => jest.fn());
 
 describe('sunTimeManager', () => {
-	const { getCalculatedSunTimes, getDayOfTheWeek } = SunTimeManager;
+	const { getCalculatedSunTimes } = SunTimeManager;
 
 	const date = Symbol('date');
 	const latitude = Symbol('latitude');
