@@ -3,6 +3,7 @@ import dayjs from 'dayjs';
 import SunCalc from 'suncalc';
 import * as timezone from 'dayjs/plugin/timezone';
 import * as utc from 'dayjs/plugin/utc';
+import { peek } from '@laufire/utils/debug';
 
 dayjs.extend(utc);
 dayjs.extend(timezone);
@@ -26,8 +27,8 @@ const SunTimeManager = {
 	getDayOfTheWeek: (
 		date, latitude, longitude, tZone
 	) => {
-		const sunTimeData = SunTimeManager
-			.getCalculatedSunTimes({ date, latitude, longitude, tZone });
+		const sunTimeData = peek(SunTimeManager
+			.getCalculatedSunTimes({ date, latitude, longitude, tZone }));
 		const dateTime = dayjs(sunTimeData.date);
 		const { sunrise } = sunTimeData;
 
