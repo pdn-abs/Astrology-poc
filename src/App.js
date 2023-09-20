@@ -1,17 +1,15 @@
 import { React } from 'react';
 import './App.scss';
-import SunTimeManager from './services/SunTimeManager';
+import DayOfTheWeek from './DayOfTheWeek';
 
 const App = (context) => {
-	const { config: { testData, latitude,
-		longitude, timezone: tZone }} = context;
+	const { config: { testData }} = context;
 
-	return <div className="App">
-		{testData.map((date, id) =>
-			<div key={ id }>{SunTimeManager.getDayOfTheWeek(
-				date, latitude, longitude, tZone
-			)}
-			</div>)}
+	return <div className="App" role="App">
+		{
+			testData.map((date, id) =>
+				<DayOfTheWeek key={ id } { ...{ ...context, data: date } }/>)
+		}
 	</div>;
 };
 
