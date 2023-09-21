@@ -1,7 +1,7 @@
-import { render } from '@testing-library/react';
-
-import App from './App';
+import { render, screen } from '@testing-library/react';
 import context from './core/context';
+import { React } from 'react';
+import App from './App';
 
 describe('App', () => {
 	test('renders the component appropriately', () => {
@@ -9,5 +9,13 @@ describe('App', () => {
 		const [rootElement] = children;
 
 		expect(rootElement).toBeInTheDocument();
+	});
+	test('Displays the DayOfTheWeek', () => {
+		render(<App { ...context }/>);
+
+		context.config.testData.forEach((date, id) => {
+			expect(screen.getAllByRole('DayOfTheWeek')[id])
+				.toBeInTheDocument();
+		});
 	});
 });
