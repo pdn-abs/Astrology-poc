@@ -1,8 +1,8 @@
-import { render, screen } from '@testing-library/react';
+import { render } from '@testing-library/react';
 import context from './core/context';
 import { React } from 'react';
 import App from './App';
-import * as DayOfTheWeek from './DayOfTheWeek';
+import * as DayOfTheWeek from './components/DayOfTheWeek';
 
 describe('App', () => {
 	test('renders the component appropriately', () => {
@@ -13,15 +13,20 @@ describe('App', () => {
 	});
 	test('Displays the DayOfTheWeek', () => {
 		jest.spyOn(DayOfTheWeek, 'default')
-			.mockReturnValue(<div role="DayOfTheWeek"/>);
+			.mockReturnValue(<div/>);
+
+		const { container: { children }} = render(App(context));
+		const [rootElement] = children;
+
+		expect(rootElement).toBeInTheDocument();
 
 		render(<App { ...context }/>);
 
 		context.config.testData.forEach((date, id) => {
-			expect(screen.getAllByRole('DayOfTheWeek')[id])
+			expect(children[0].childNodes[id])
 				.toBeInTheDocument();
-			expect(DayOfTheWeek.default)
-				.toHaveBeenCalledWith({ ...context, data: date }, {});
+			expect(DayOfTheWeek.default.mock.calls[id][0])
+				.toEqual({ ...context, data: date });
 		});
 	});
 });
